@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LockOutlined } from "@mui/i -material";
+import { LockOutlined } from "@mui/icons-material";
 import { Avatar, LinearProgress, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
