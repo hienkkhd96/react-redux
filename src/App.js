@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./component/Header";
 import Counter from "./features/counter";
@@ -8,9 +8,6 @@ function App() {
     <div className="App">
       <Header />
       <Router>
-        <Link to="/">Home</Link>
-        <Link to="counter">Counter</Link>
-        <Link to="products">Products</Link>
         <Routes>
           <Route
             path="/*"

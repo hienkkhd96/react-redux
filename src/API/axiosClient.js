@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseUrl: "https://api.ezfrontend.com/",
+  baseURL: "https://api.ezfrontend.com/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -20,16 +20,10 @@ axiosClient.interceptors.response.use(
   },
   function (error) {
     const { config, status } = error.response;
-    if (
-      config.url === "https://api.ezfrontend.com/auth/local/register" &&
-      status === 400
-    ) {
+    if (config.url === "/auth/local/register" && status === 400) {
       throw new Error("Địa chỉ email đã được đăng ký");
     }
-    if (
-      config.url === "https://api.ezfrontend.com/auth/local" &&
-      status === 400
-    ) {
+    if (config.url === "/auth/local" && status === 400) {
       throw new Error("Sai tên tài khoản hoặc mật khẩu");
     }
     return Promise.reject(error);

@@ -5,24 +5,18 @@ const productApi = {
     const newParams = { ...params };
     // Transform _page to _start
     newParams._start =
-      !params.page || params.page <= 1
+      !params._page || params._page <= 1
         ? 0
-        : (params.page - 1) * (params._limit || 20);
+        : (params._page - 1) * (params._limit || 10);
     // Remove _page key
     delete newParams._page;
     // Fetch Product list + cont
-    const productList = await axiosClient.get(
-      "https://api.ezfrontend.com/products",
-      {
-        params: newParams,
-      }
-    );
-    const count = await axiosClient.get(
-      "https://api.ezfrontend.com/products/count",
-      {
-        params: newParams,
-      }
-    );
+    const productList = await axiosClient.get("/products", {
+      params: newParams,
+    });
+    const count = await axiosClient.get("/products/count", {
+      params: newParams,
+    });
     return {
       data: productList,
       pagination: {
