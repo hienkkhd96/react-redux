@@ -45,8 +45,6 @@ function ListPage(props) {
       _page: Number(params._page) || 1,
       _limit: Number(params._limit) || 10,
       _sort: params._sort || "salePrice:asc",
-      isFreeShip: params._isFreeShip === true,
-      isPromotion: params._isPromotion === true,
     };
   }, [location.search]);
   useEffect(() => {
