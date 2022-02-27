@@ -53,8 +53,8 @@ function FilterByPrice({ filters = {}, onChange }) {
   };
   const handleSubmit = () => {
     if (
-      (onChange && Number(values.salePrice_gte !== 0)) ||
-      (onChange && Number(values.salePrice_lte) !== 0)
+      Number(values.salePrice_lte) !== 0 ||
+      Number(values.salePrice_gte) !== 0
     )
       onChange(values);
     else {

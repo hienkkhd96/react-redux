@@ -113,7 +113,7 @@ function ListPage(props) {
                   onChange={handleFilterChange}
                 />
                 {loading ? (
-                  <ProduclistSkeleton length={queryPrams._limit} />
+                  <ProduclistSkeleton length={productList.length} />
                 ) : (
                   <ProductList data={productList} />
                 )}
