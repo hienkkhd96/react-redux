@@ -37,10 +37,10 @@ function FilterByViewer({ filters = {}, onChange }) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [filters]);
   const categoryName = categoryList.map((x) => x.name);
   const itemName = categoryName[id];
-  let LIST_FILTERS = [
+  const LIST_FILTERS = [
     {
       id: 1,
       getLabel: () => "Giao hàng miễn phí",
