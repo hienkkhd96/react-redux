@@ -27,16 +27,22 @@ function FilterByViewer({ filters = {}, onChange }) {
   const id = Math.ceil(filters[filterId] - 1);
   const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {
-    (async () => {
+    let isFetch = true;
+    (async function getCategoryList() {
       try {
         if (filters[filterId]) {
-          const reponse = await categoryApi.getAll();
-          setCategoryList(reponse);
+          if (!!isFetch) {
+            const reponse = await categoryApi.getAll();
+            setCategoryList(reponse);
+          }
         }
       } catch (error) {
         console.log(error);
       }
     })();
+    return () => {
+      isFetch = false;
+    };
   }, [filters]);
   const categoryName = categoryList.map((x) => x.name);
   const itemName = categoryName[id];

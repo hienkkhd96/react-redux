@@ -30,9 +30,9 @@ const useStyles = makeStyles({
 function ListPage(props) {
   const classes = useStyles();
   const location = useLocation();
+  const navigate = useNavigate();
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 10,
