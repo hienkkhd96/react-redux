@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useParams } from "react-router-dom";
 import useProductDetail from "../components/Hooks/useProductDetail";
+import ProductDetail from "../components/ProductDetail";
 import ProductThumbnail from "../components/ProductThumbnail";
 const theme = createTheme();
 const useStyles = makeStyles({
@@ -43,7 +44,7 @@ function DetailPage() {
               <ProductThumbnail product={product} />
             </Grid>
             <Grid item className={classes.right}>
-              Product detail
+              <ProductDetail product={product} />
             </Grid>
           </Grid>
         </Paper>

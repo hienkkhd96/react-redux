@@ -53,7 +53,6 @@ function ListPage(props) {
         setLoading(true);
         const reponse = await productApi.getAll(queryPrams);
         setProductList(reponse.data);
-        console.log(reponse.data);
         setPagination(reponse.pagination);
       } catch (error) {
         console.log("faled to get product list", error);

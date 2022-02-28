@@ -33,15 +33,21 @@ function FilterByCategory({ filters = {}, onChange }) {
   const classes = useStyles();
   const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {
+    let isFetch = true;
     (async () => {
       try {
-        const reponse = await categoryApi.getAll();
-        setCategoryList(reponse);
+        if (!!isFetch) {
+          const reponse = await categoryApi.getAll();
+          setCategoryList(reponse);
+        }
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+    return () => {
+      isFetch = false;
+    };
+  }, [filters]);
   const handleCategoryClick = (values) => {
     if (onChange) {
       onChange({ "category.id": values.id });
