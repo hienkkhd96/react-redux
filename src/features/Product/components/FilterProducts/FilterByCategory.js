@@ -1,9 +1,7 @@
 import { createTheme, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import categoryApi from "../../../../API/categoryApi";
-import { makeStyles } from "@mui/styles";
 const theme = createTheme();
 const useStyles = makeStyles({
   root: {},
@@ -27,27 +25,11 @@ const useStyles = makeStyles({
 FilterByCategory.propTypes = {
   onChange: PropTypes.func,
   filters: PropTypes.object,
+  categoryList: PropTypes.array,
 };
 
-function FilterByCategory({ filters = {}, onChange }) {
+function FilterByCategory({ filters = {}, onChange, categoryList = [] }) {
   const classes = useStyles();
-  const [categoryList, setCategoryList] = useState([]);
-  useEffect(() => {
-    let isFetch = true;
-    (async () => {
-      try {
-        if (!!isFetch) {
-          const reponse = await categoryApi.getAll();
-          setCategoryList(reponse);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    return () => {
-      isFetch = false;
-    };
-  }, [filters]);
   const handleCategoryClick = (values) => {
     if (onChange) {
       onChange({ "category.id": values.id });

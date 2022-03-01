@@ -1,7 +1,7 @@
 import { Box, Container, createTheme, Grid, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import useProductDetail from "../components/Hooks/useProductDetail";
 import ProductDetail from "../components/ProductDetail";
 import ProductThumbnail from "../components/ProductThumbnail";
@@ -23,6 +23,24 @@ const useStyles = makeStyles({
     justifyContent: "center",
     marginTop: "20px",
     paddingBottom: "20px",
+  },
+  description: {
+    display: "flex",
+    flexFlow: "row nowarp",
+    justifyContent: "center",
+    listStyleType: "none",
+    alignItems: "center",
+    "&>li": {
+      padding: theme.spacing(2, 4),
+      "&>a": {
+        textDecoration: "none",
+        color: theme.palette.grey[800],
+      },
+      "&>a.active": {
+        textDecoration: "underline",
+        color: theme.palette.primary.main,
+      },
+    },
   },
 });
 
@@ -48,6 +66,7 @@ function DetailPage() {
             </Grid>
           </Grid>
         </Paper>
+        <Outlet />
       </Container>
     </Box>
   );

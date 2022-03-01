@@ -2,8 +2,7 @@
 import { Box, Chip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import { useEffect, useMemo, useState } from "react";
-import categoryApi from "../../../../API/categoryApi";
+import { useMemo } from "react";
 const useStyles = makeStyles({
   root: {},
   list: {
@@ -21,29 +20,10 @@ FilterByViewer.propTypes = {
   onChange: PropTypes.func,
 };
 
-function FilterByViewer({ filters = {}, onChange }) {
+function FilterByViewer({ filters = {}, onChange, categoryList = [] }) {
   const classes = useStyles();
   const filterId = "category.id";
   const id = Math.ceil(filters[filterId] - 1);
-  const [categoryList, setCategoryList] = useState([]);
-  useEffect(() => {
-    let isFetch = true;
-    (async function getCategoryList() {
-      try {
-        if (filters[filterId]) {
-          if (!!isFetch) {
-            const reponse = await categoryApi.getAll();
-            setCategoryList(reponse);
-          }
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    return () => {
-      isFetch = false;
-    };
-  }, [filters]);
   const categoryName = categoryList.map((x) => x.name);
   const itemName = categoryName[id];
   const LIST_FILTERS = [
@@ -90,7 +70,7 @@ function FilterByViewer({ filters = {}, onChange }) {
     },
     {
       id: 4,
-      getLabel: (filters) => {},
+      getLabel: () => {},
       isActive: () => {},
       isVisible: (filters) => filters[filterId],
       isRemoveable: () => {},

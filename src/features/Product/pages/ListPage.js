@@ -1,14 +1,15 @@
 import { Box, Container, Grid, Pagination, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import queryString from "query-string";
 import { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
+import categoryApi from "../../../API/categoryApi";
 import productApi from "../../../API/productApi";
 import FilterProducts from "../components/FilterProducts";
 import FilterByViewer from "../components/FilterProducts/FilterByViewer";
 import ProduclistSkeleton from "../components/ProducListSkeleton";
 import ProductList from "../components/ProductList";
 import ProductSort from "../components/ProductSort";
-import queryString from "query-string";
 
 ListPage.propTypes = {};
 const useStyles = makeStyles({
@@ -47,6 +48,7 @@ function ListPage(props) {
       _sort: params._sort || "salePrice:asc",
     };
   }, [location.search]);
+  const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {
     (async () => {
       try {
@@ -60,6 +62,22 @@ function ListPage(props) {
       setLoading(false);
     })();
   }, [queryPrams]);
+  useEffect(() => {
+    let isFetch = true;
+    (async () => {
+      try {
+        if (!!isFetch) {
+          const reponse = await categoryApi.getAll();
+          setCategoryList(reponse);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    return () => {
+      isFetch = false;
+    };
+  }, []);
   const handleChangePage = (e, page) => {
     const filters = {
       ...queryPrams,
@@ -98,6 +116,7 @@ function ListPage(props) {
                   productList={productList}
                   filters={queryPrams}
                   onChange={handleFilterChange}
+                  categoryList={categoryList}
                 />
               </Paper>
             </Grid>
@@ -110,6 +129,7 @@ function ListPage(props) {
                 <FilterByViewer
                   filters={queryPrams}
                   onChange={handleFilterChange}
+                  categoryList={categoryList}
                 />
                 {loading ? (
                   <ProduclistSkeleton length={productList.length} />

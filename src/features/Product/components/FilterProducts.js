@@ -8,9 +8,10 @@ import FilterByServices from "./FilterProducts/FilterByServices";
 FilterProducts.propTypes = {
   filters: PropTypes.object.isRequired,
   onChange: PropTypes.func,
+  categoryList: PropTypes.array,
 };
 
-function FilterProducts({ filters, onChange }) {
+function FilterProducts({ filters = {}, onChange, categoryList = [] }) {
   const handleChange = (newFilter) => {
     if (!onChange) return;
     const newFilters = {
@@ -22,7 +23,11 @@ function FilterProducts({ filters, onChange }) {
   };
   return (
     <Box>
-      <FilterByCategory filters={filters} onChange={handleChange} />
+      <FilterByCategory
+        categoryList={categoryList}
+        filters={filters}
+        onChange={handleChange}
+      />
       <FilterByPrice filters={filters} onChange={handleChange} />
       <FilterByServices filters={filters} onChange={handleChange} />
     </Box>
