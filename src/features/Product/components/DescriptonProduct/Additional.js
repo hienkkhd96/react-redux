@@ -4,7 +4,7 @@ import React from "react";
 Additional.propTypes = {};
 
 function Additional(props) {
-  return <Box></Box>;
+  return <Box>Additional</Box>;
 }
 
 export default Additional;
