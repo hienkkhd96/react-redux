@@ -1,10 +1,7 @@
 import { Box, createTheme, Link as Connect } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { NavLink, Outlet, Route, Routes } from "react-router-dom";
-import Additional from "./DescriptonProduct/Additional";
-import Description from "./DescriptonProduct/Description";
-import Reviews from "./DescriptonProduct/Reviews";
+import { NavLink, Outlet } from "react-router-dom";
 const theme = createTheme();
 const useStyles = makeStyles({
   root: {},
